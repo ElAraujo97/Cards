@@ -1,0 +1,3 @@
+/Users/EverardoAraujo/Desktop/HW/cards/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/EverardoAraujo/Desktop/HW/cards/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/EverardoAraujo/Desktop/HW/cards/cmake-build-debug/CMakeFiles/cards.dir

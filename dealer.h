@@ -4,12 +4,12 @@
 #include <vector>
 #include <string>
 
-///using namespace std;
+using namespace std;
 
 class Dealer {
 
 public:
-	std::vector<std::string> deal(int numCards);
+	vector<string> deal(int numCards);
 };
 
 #endif
