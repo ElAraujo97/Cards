@@ -1,0 +1,135 @@
+Your assignment is to create a program called "cards" that will satisfy all the
+requirements listed in the "Requirements" section below. To do this, you'll just
+need to fill out the empty code blocks in main.cpp, dealer.cpp, and dealer.h.
+
+The program you write is expected to match the output in the examples shown
+alongside the requirements, and the code is expected to also make a series of
+automated tests written in test.cpp pass.
+
+## Running the program
+
+A Makefile is included in the .zip you were provided as part of the assignment. It
+allows you to easily create the binary used to run the program. Simply running
+`make` in the command line is expected to give you the "cards" executable that
+fulfills the requirements listed out below.
+
+## Running the tests
+
+You run the automated test suite similarly to the way that you run the main program:
+using the Makefile. Just run `make test` in the command line and that will produce
+an executable called "test" that may be used to run the tests.
+
+If you can think of any test cases you'd like to add, by all means add them! Testing
+is a core tenet of our engineering process.
+
+## Requirements
+
+1) The 'cards' executable should take a number between 1 and 5, and display the same
+number of cards back to you in a pretty way. The cards are the standard cards you'd
+find in any deck of cards, minus the Joker. 
+
+The suits should be displayed as follows:
+Spades = ^
+Hearts = @
+Clubs = %
+Diamonds = *
+
+The values should be displayed as follows:
+Ace = A
+King = K
+Queen = Q
+Jack = J
+10 = 10
+9 = 9
+(and so on down to 2)
+
+Examples:
+```bash
+$ ./cards 5
+You drew (7^ K^ 4% 10* A@)
+$ ./cards 1
+You drew (5%)
+$ ./cards 4
+You drew (9^ 2* 3* 8@)
+```
+
+2) The program should print a pretty error message if you ask it to give you less than 1
+card or more than 5 cards, or if you ask it nothing at all.
+
+Examples:
+```bash
+$ ./cards
+You must ask for a number between 1 and 5
+$ ./cards 0
+You must ask for a number between 1 and 5
+$ ./cards 6
+You must ask for a number between 1 and 5
+$ ./cards hats for dolphins
+You must ask for a number between 1 and 5
+```
+
+3) The program should tell you when you've drawn a special hand, as in poker.
+For example, a hand with two 7s and three distinct cards should tell you that you
+have found one pair.
+
+For simplicity's sake, this behavior should only occur when the user tells the
+program to draw 5 cards.
+
+The following 9 special hands are expected to be handled by the program:
+- royal flush
+- straight flush
+- four of a kind
+- full house
+- flush
+- straight
+- three of a kind
+- two pairs
+- one pair
+
+They are listed in the order of their ranking, from highest to lowest. You can learn 
+more about each [here](https://www.cardplayer.com/rules-of-poker/hand-rankings).
+
+Examples:
+```bash
+$ ./cards 5
+You drew (7^ 8^ 9^ 10^ J^), a straight flush
+$ ./cards 5
+You drew (5% 4@ 5^ 4^ 10*), two pairs
+$ ./cards 5
+You drew (7* J* 2@ A^ K^)
+```
+
+4) The program should have a special case argument called "play" that replaces the
+number you'd normally feed into it. When this argument is passed, the program should
+generate two hands of 5 cards apiece, compare the two, and then print them both to
+the terminal, telling you which one of them wins.
+
+Examples:
+```bash
+$ ./cards play
+Player one drew (7^ 8^ 9^ 10^ J^), a straight flush
+Player two drew (7^ 7* 7@ 7% 5%) a four of a kind
+Player one wins
+$ ./cards play
+Player one drew (7^ 8^ 7@ 2* K*), a pair
+Player two drew (8* 8@ 10* K^ J%), a pair
+Player two wins
+$ ./cards play
+Player one drew (7* J* 2@ A^ K^)
+Player two drew (7* J* 2@ A^ Q^)
+Player one wins
+$ ./cards play
+Player one drew (J* 6^ 2@ A^ 5%)
+Player two drew (7* J* 2@ A^ J^)
+Tie
+```
+
+Assume the following:
+- Each player gets their own deck (there can be duplicate cards between the two
+players' hands)
+- When neither player draws a special hand, the player with the single highest card
+in their hand is the winner. The third example above illustrates this.
+- When both players draw the same special hand, the player with the highest value
+card that appears as part of the special match in the hand wins. The second
+example above illustrates this.
+- Ace is the lowest value card, King is the highest value card
