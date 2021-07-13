@@ -1,4 +1,4 @@
-#ifndef DEALER_H
+  #ifndef DEALER_H
 #define DEALER_H
 
 #include <vector>
@@ -7,7 +7,8 @@
 using namespace std;
 
 class Dealer {
-
+private:
+    //Deck myDeck;
 public:
 	vector<string> deal(int numCards);
 };

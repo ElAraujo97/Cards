@@ -6,3 +6,19 @@
 
 #IncludeRegexTransform: 
 
+/Users/EverardoAraujo/Desktop/HW/cards/dealer.h
+vector
+-
+string
+-
+
+/Users/EverardoAraujo/Desktop/HW/cards/main.cpp
+iostream
+-
+string
+-
+array
+-
+dealer.h
+/Users/EverardoAraujo/Desktop/HW/cards/dealer.h
+

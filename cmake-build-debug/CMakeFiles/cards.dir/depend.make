@@ -4,5 +4,6 @@
 CMakeFiles/cards.dir/dealer.cpp.o: ../dealer.cpp
 CMakeFiles/cards.dir/dealer.cpp.o: ../dealer.h
 
+CMakeFiles/cards.dir/main.cpp.o: ../dealer.h
 CMakeFiles/cards.dir/main.cpp.o: ../main.cpp
 
