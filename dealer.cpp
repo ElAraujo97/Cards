@@ -20,13 +20,46 @@ int Card::getValue() {
     return this->myValue;
 }
 
+string Card::suitValueToString(Card myCard){
+    string value;
+    int cardValue = myCard.getValue();
+    if(cardValue == 11){
+        value = "J";
+    } else if(cardValue == 12){
+        value = "Q";
+    } else if(cardValue == 13){
+        value = "K";
+    } else if (cardValue == 1){
+        value = "A";
+    } else {
+        value = to_string(cardValue);
+    }
+
+
+
+    return value + myCard.getSuit();
+
+
+}
 
 vector<string> Dealer::deal(int numCards) {
     vector<string> myHand;
-    array<Card, 52>::iterator deckIterator;
+    string pair;
+
+    for(int i = cardsDrawn; numCards > 0; numCards--){
+        pair = myDeck.at(i).suitValueToString(myDeck.at(i));
+        myHand.push_back(pair);
+        this->cardsDrawn++;
+        i++;
+    }
 
 
-	return vector<string>();
+
+
+
+
+
+	return myHand;
 }
 
 

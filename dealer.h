@@ -26,6 +26,7 @@ using namespace std;
       string getSuit();
       void setValue(int value);
       int getValue();
+      string suitValueToString(Card myCard);
   };
 
 
@@ -83,6 +84,7 @@ using namespace std;
 
   public:
       array<Card, 52> myDeck;
+      int cardsDrawn = 0;
       vector<string> deal(int numCards);
       void cardsToDeck();
       void shuffle();
