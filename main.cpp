@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
     string play = "play";
     string inputString = inputStringPointer;
 
-
+    srand(time(NULL));
 
     if(inputString.compare(play) == 0){
         wantToPlay = true;
@@ -75,6 +75,7 @@ int main(int argc, char **argv) {
         player2.cardsToDeck();
 
         player2.shuffle();
+        player2.shuffle();
         vector<string> p2cards = player2.deal(5);
 
         cout << "Player two drew (";
@@ -104,7 +105,44 @@ int main(int argc, char **argv) {
             cout << "Player two wins" << endl;
         } else{
             //Check tiebreaker, otherwise "Tie"
-            cout << "Tie" << endl;
+            array<Card, 5> player1Cards;
+            array<Card, 5> player2Cards;
+
+            for(int i = 0; i < 5; i++){
+                player1Cards.at(i) = player1.myDeck.at(i);
+                player2Cards.at(i) = player2.myDeck.at(i);
+            }
+
+
+            for(int i =0; i < 5; i++){
+                for(int j = i + 1; j < 5; j++) {
+                    if (player1Cards[i].getValue() > player1Cards[j].getValue()) {
+                        Card tempCard = player1Cards.at(i);
+                        player1Cards.at(i) = player1Cards.at(j);
+                        player1Cards.at(j) = tempCard;
+                    }
+                }
+            }
+
+            for(int i =0; i < 5; i++){
+                for(int j = i + 1; j < 5; j++) {
+                    if (player2Cards[i].getValue() > player2Cards[j].getValue()) {
+                        Card tempCard = player2Cards.at(i);
+                        player2Cards.at(i) = player2Cards.at(j);
+                        player2Cards.at(j) = tempCard;
+                    }
+                }
+            }
+
+            if(player1Cards.at(4).getValue() > player2Cards.at(4).getValue()){
+                cout << "Player one wins" << endl;
+            } else if(player1Cards.at(4).getValue() < player2Cards.at(4).getValue()){
+                cout << "Player two wins" << endl;
+            } else {
+                cout << "Tie" << endl;
+            }
+
+
         }
 
 
@@ -157,13 +195,16 @@ int main(int argc, char **argv) {
 
 
         }
-    }
+
+        cout << endl;
 
     }
 
+    }
 
 
-    cout << "Hello, World!" << endl;
+
+  //  cout << "Hello, World!" << endl;
 
 
 
@@ -253,6 +294,15 @@ int checkHand(array<Card, 52> myDeck) {
         return rank;
     }
 
+    //Check for full house
+    if(((myCards.at(0).getValue() == myCards.at(1).getValue() && myCards.at(1).getValue() == myCards.at(2).getValue()) &&
+        (myCards.at(3).getValue() == myCards.at(4).getValue())) || ((myCards.at(2).getValue() == myCards.at(3).getValue() &&
+                                                                     myCards.at(3).getValue() == myCards.at(4).getValue()) && (myCards.at(0).getValue() == myCards.at(1).getValue()) )){
+        cout << ", a full house" << endl;
+        rank = 6;
+        return rank;
+    }
+
     //Check for flush
     if(sameSuit){
         cout << ", a flush" << endl;
@@ -278,10 +328,10 @@ int checkHand(array<Card, 52> myDeck) {
     if((myCards.at(0).getValue() == myCards.at(1).getValue() && myCards.at(1).getValue() == myCards.at(2).getValue()) ||
             (myCards.at(1).getValue() == myCards.at(2).getValue() && myCards.at(2).getValue() == myCards.at(3).getValue()) ||
                 (myCards.at(2).getValue() == myCards.at(3).getValue() && myCards.at(3).getValue() == myCards.at(4).getValue())){
-        //cout << "a three of a kind" << endl;
+        cout << " a three of a kind" << endl;
         threeOfKind = true;
         rank = 3;
-        //return rank;
+        return rank;
     }
 
     //Check for pair
@@ -294,14 +344,7 @@ int checkHand(array<Card, 52> myDeck) {
 
 
 
-    //Check for full house
-    if(((myCards.at(0).getValue() == myCards.at(1).getValue() && myCards.at(1).getValue() == myCards.at(2).getValue()) &&
-            (myCards.at(3).getValue() == myCards.at(4).getValue())) || ((myCards.at(2).getValue() == myCards.at(3).getValue() &&
-                myCards.at(3).getValue() == myCards.at(4).getValue()) && (myCards.at(0).getValue() == myCards.at(1).getValue()) )){
-        cout << ", a full house" << endl;
-        rank = 6;
-        return rank;
-    }
+
 
     //Check for 2 pair
     if((myCards.at(0).getValue() == myCards.at(1).getValue() && myCards.at(2).getValue() == myCards.at(3).getValue()) ||
@@ -312,13 +355,12 @@ int checkHand(array<Card, 52> myDeck) {
 
     }
 
-    if(rank == 3){
-        cout << "three of a kind" << endl;
-    } else if (rank == 2) {
+    if(rank == 2){
         cout << ", two pairs" << endl;
     } else if (rank == 1) {
         cout << ", a pair" << endl;
     }
+
 
 
     return rank;

@@ -34,7 +34,7 @@ using namespace std;
 //Class for a deck of cards
   class Deck{
   private:
-      int size = 52;
+   //   int size = 52;
   public:
 
       Deck(){
@@ -81,13 +81,18 @@ using namespace std;
   };
 
   class Dealer {
-
+  private:
+      int cardsDrawn = 0;
   public:
       array<Card, 52> myDeck;
-      int cardsDrawn = 0;
+      //int cardsDrawn = 0;
       vector<string> deal(int numCards);
       void cardsToDeck();
       void shuffle();
+
+      int getCardsDrawn();
+      void setCardDrawn();
+
   };
 
 

@@ -1,6 +1,8 @@
 #include "dealer.h"
 #include <sstream>
 #include <array>
+#include <iostream>
+#include <unistd.h>
 
 using namespace std;
 
@@ -64,7 +66,7 @@ vector<string> Dealer::deal(int numCards) {
 
 
 void Dealer::shuffle(){
-    srand(time(NULL));
+
     Deck tempDeck;
     int count = 52;
 
@@ -78,11 +80,11 @@ void Dealer::shuffle(){
     }
 
     //Transfer shuffled tempDeck to myDeck
-    for(auto i = 0; i < 52; i++){
+    for(int i = 0; i < 52; i++){
         this->myDeck.at(i) = tempDeck.myDeck.at(i);
     }
 
-    return;
+
 }
 
 void Dealer::cardsToDeck(){
@@ -120,3 +122,11 @@ void Dealer::cardsToDeck(){
 
     }
 
+int Dealer::getCardsDrawn(){
+    return this->cardsDrawn;
+};
+
+
+void Dealer::setCardDrawn(){
+    this->cardsDrawn++;
+};
